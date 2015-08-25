@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html>
+
+<head lang="zh">
+    <meta charset="UTF-8">
+    <title>test</title>
+    <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+    <meta content="email=no" name="format-detection" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <link href="css.css" rel="stylesheet" type="text/css" />
+    <script src="zepto.js"></script>
+    <script src="fx.js"></script>
+</head>
+
+<body>
+    <div class="show show_1" style="display:block">
+        <img src="img/1.jpg">
+    </div>
+    <div class="show show_2" style="display:block">
+        <img src="img/2.jpg">
+    </div>
+    <div class="show show_3" style="display:block">
+        <img src="img/3.jpg">
+    </div>
+    <div class="show show_4" style="display:block">
+        <img src="img/4.jpg">
+    </div>
+    <div class="show show_5" style="display:block">
+        <img src="img/5.jpg">
+    </div>
+    <div class="show show_6" style="display:block">
+        <img src="img/6.jpg">
+    </div>
+    <div class="show show_7" style="display:block">
+        <img src="img/7.jpg">
+    </div>
+    <div class="show show_8" style="display:block">
+        <img src="img/8.jpg">
+    </div>
+    <div class="show show_9" style="display:block">
+        <img src="img/9.jpg">
+    </div>
+    <div class="show show_10" style="display:block">
+        <img src="img/10.jpg">
+    </div>
+    <div class="show show_11" style="display:block">
+        <img src="img/11.jpg">
+    </div>
+    <script type="text/javascript">
+    var show = 1
+
+    var last_num = 11
+
+
+    //: 判断网页是否加载完成     
+    document.onreadystatechange = function() {
+        if (document.readyState == "complete") {
+            $('.show_' + show).animate({
+                marginTop: "-100vh"
+            }, 0, '', fn);
+            show++
+        }
+    }
+
+
+    var result = []
+
+
+    //页面加完后动态效果的调用
+    var fn = function() {
+        console.log('complte:' + show)
+
+        //show==1  加载中
+
+        //show==2  首页
+
+        //show==3  第一醉
+
+        //show==4  第二醉
+
+        //show==5  第三醉
+
+        //show==6  第四醉
+
+        //show==7  第五醉
+
+        //show==8  第六醉
+
+        //show==9  第七醉
+
+        //show==10  数据
+
+        //show==11  发送手机
+
+
+    }
+
+    //回答问题接口
+    var answer_q = function(q, a) {
+        $.post('', {}, function(res) {
+            //接口调用成功，去下一页
+            next_page()
+        })
+    }
+
+
+
+    // 下一页面
+    var next_page = function() {
+        if (show > last_num - 1) {
+
+        } else {
+            $('.show_' + show).animate({
+                marginTop: "-100vh"
+            }, 500, '', fn);
+            show++
+        }
+    }
+
+
+
+
+    //点击yes
+    $('.yes').click(function() {
+        result.push(1)
+        var q = show-2
+        var a = 1
+        answer_q(q,a)
+    })
+
+
+    //点击no
+    $('.no').click(function() {
+        result.push(0)
+        var q = show-2
+        var a = 0
+        answer_q(q,a)
+            //最后一个，调接口获取数据
+        if (show == last_num) {
+
+        }
+    })
+
+
+    //测试用，点击事件
+    $('body').click(function() {
+        if (show > last_num - 1) {
+            console.log(result)
+        } else {
+            next_page()
+        }
+    })
+
+    //首页上滑效果
+    $('body').swipeUp(function(e) {
+        if (show == 2) {
+            next_page()
+        }
+    })
+
+
+
+
+    //点击赎罪
+    $(".shuzui").click(function() {
+        next_page()
+    })
+
+
+    //发送手机号
+    $(".phone_post").click(function() {
+
+        //发送手机号码
+
+        //跳转页面
+
+
+    })
+
+
+
+    /*
+        //向上滑动
+        $('body').swipeUp(function(e) {
+                // alert('swipeUp'); //
+                if (show < 11) {
+                    console.log(show)
+                    $('.show_' + show).animate({
+                        marginTop: "-100vh"
+                    }, 500, '', fn);
+                    // $('.show_' + show).hide();
+                    // $('.show_' + (show + 1)).show()
+                    show++
+                } else {
+
+                }
+            })
+            //向下滑动
+        $('body').swipeDown(function(e) {
+                if (show > 1) {
+                    $('.show_' + --show).animate({
+                        marginTop: "0vh"
+                    }, 500, '', fn);
+                } else {
+
+                }
+            })
+            //触摸滑动
+        $('body').tap(function() {
+                // alert('tap'); //ok
+            })
+            //向左滑动
+        $('body').swipeLeft(function() {
+                // alert('swipeLeft'); //ok
+            })
+            //向右滑动
+        $('body').swipeRight(function() {
+            // alert('swipeRight'); //ok
+        })*/
+
+
+
+    //阻止浏览器本身的上下滑动
+    document.addEventListener('touchmove', function(event) {
+        event.preventDefault();
+    }, false);
+
+
+
+    //移除滚动条
+    document.body.style.overflow = 'hidden';
+    </script>
+</body>
+
+</html>
